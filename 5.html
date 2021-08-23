@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+
+    }
+
+    #header {
+        width: 100%;
+        height: 70px;
+        background-color: rgb(53, 129, 5);
+        top: 0px;
+        left: 0px;
+        display: flex;
+
+    }
+
+    #header #search {
+        padding: 0px 0px;
+        margin-left: 250px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+
+    #header h1 {
+        padding-top: 10px;
+        padding-left: 40px;
+        font-size: 40px;
+
+    }
+
+    #home {
+        border: 1px solid black;
+        padding: 20px 20px;
+        margin-right: 750px;
+        margin-top: 30px;
+        margin-left: 200px;
+    }
+
+    #home #text {
+        margin-top: 10px;
+    }
+
+    #home input {
+        padding: 5px 0px;
+    }
+
+    #home #submit {
+        padding: 1px 4px;
+        background-color: black;
+        color: white;
+        font-size: 18px;
+    }
+
+    #home #submit:hover {
+        background-color: rgb(73, 73, 73);
+
+    }
+
+    #title {
+        margin-top: 20px;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    #items {
+        margin-top: 20px;
+        text-decoration: none;
+
+
+    }
+
+    #items .a {
+        padding: 4px 5px;
+        border: 1px solid black;
+        background-color: rgb(248, 236, 219);
+        text-decoration: none;
+        display: flex;
+    }
+
+    #items li button {
+        margin-left: 300px;
+        padding: 3px 4px;
+        background-color: red;
+        color: white;
+        border: 1px solid red;
+    }
+</style>
+
+<body>
+    <section id="header">
+        <h1>Item Listener</h1>
+        <input type="text" id="search" placeholder="Search items....">
+    </section>
+
+
+    <section id="home">
+        <h2>Add Items</h2>
+        <form id="form">
+            <input type="text" id="text">
+            <input type="Submit" id="submit" value="submit">
+        </form>
+
+        <div id="title">Items </div>
+        <section id="items" class="item">
+            <li class="a">Item-1 <button class="button">X</button></li>
+            <li class="a">Item-2 <button class="button">X</button></li>
+            <li class="a">Item-3 <button class="button">X</button></li>
+            <li class="a">Item-4 <button class="button">X</button></li>
+        </section>
+
+
+    </section>
+
+    <script>
+        var form = document.getElementById('form');
+        var items = document.getElementById('items');
+        var search = document.getElementById('search')
+
+        // form submit event
+        form.addEventListener('submit', additem);
+
+        // Delete Event
+        items.addEventListener('click', removeitem);
+
+        // Search Event
+        search.addEventListener('keyup', searchmode)
+        // add item
+        function additem(e) {
+            e.preventDefault();
+            // Get input value
+            var newitem = document.getElementById('text').value
+
+            // create new li element
+            var li = document.createElement('li');
+            // create new class
+            li.className = 'a';
+            // add text Node with input values..
+            li.appendChild(document.createTextNode(newitem));
+            items.appendChild(li);
+            console.log(items);
+
+            // create Delete button Element
+            var deletebtn = document.createElement('button');
+            // Add class to delete button
+            deletebtn.className = 'button';
+            // Append Text Node
+            deletebtn.appendChild(document.createTextNode('X'));
+            console.log(deletebtn);
+
+            li.appendChild(deletebtn);
+
+            //   itemList.appendChild(li)
+        }
+
+        // For Delete Event
+
+        function removeitem(e) {
+            if (e.target.classList.contains('delete'));
+            {
+                if (confirm('Are You Sure to Delete this item ?')) {
+                    var li = e.target.parentElement;
+                    items.removeChild(li);
+                }
+            }
+        }
+        // for Search Box events
+        function searchmode(e) {
+            var text = e.target.value.toLowerCase();
+
+            // Get li s 
+            var items = items.getElementsByTagName('li');
+            // Convert to an Array
+            Array.from(items).forEach(function (a) {
+                var itemName = search.firstChild.textContent;
+                if (itemName.toLowerCase().indexof(text) != -1) {
+                    itemlist.style.display = 'block';
+                }
+                else {
+                    item.style.display = 'none';
+                }
+            })
+        }
+
+    </script>
+</body>
+
+</html>
